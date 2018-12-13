@@ -1,5 +1,5 @@
 class AvailsController < ApplicationController
-  before_action :set_user
+  before_action :set_user, only: [:index, :show, :create, :update, :destroy]
   before_action :set_avail, only: [:show, :update, :destroy]
 
   # GET /users/:user_id/avails
@@ -30,10 +30,18 @@ class AvailsController < ApplicationController
     head :no_content
   end
 
+  # POST /avails/search
+  def search
+    searchDate = Date.parse(params[:date])
+    result = avails.where(date: searchDate.all_day)  
+
+    json_response(result)
+  end
+
   private
 
   def avail_params
-    params.permit(:date, :morning, :afternoon) # do we need to put the foreign key (examiner id) here?
+    params.permit(:date, :morning, :afternoon) # do we need to put the foreign key (user id) here?
   end
 
   def set_user
