@@ -4,5 +4,5 @@ Rails.application.routes.draw do
     resources :avails
   end
   post 'avail/search', action: :search, controller: 'avail'
-  #resources :airports only: [:index, :show]
+  resources :airports only: [:index, :show]
 end
