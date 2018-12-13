@@ -10,10 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_13_043545) do
+ActiveRecord::Schema.define(version: 2018_12_13_170452) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "avails", force: :cascade do |t|
+    t.datetime "date"
+    t.boolean "morning"
+    t.boolean "afternoon"
+    t.bigint "examiner_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["examiner_id"], name: "index_avails_on_examiner_id"
+  end
 
   create_table "examiners", force: :cascade do |t|
     t.text "bio"
@@ -35,5 +45,6 @@ ActiveRecord::Schema.define(version: 2018_12_13_043545) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "avails", "examiners"
   add_foreign_key "examiners", "users"
 end

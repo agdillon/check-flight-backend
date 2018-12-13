@@ -1,0 +1,2 @@
+class AvailsController < ApplicationController
+end
