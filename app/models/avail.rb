@@ -1,3 +1,3 @@
 class Avail < ApplicationRecord
-  belongs_to :examiner
+  belongs_to :user
 end

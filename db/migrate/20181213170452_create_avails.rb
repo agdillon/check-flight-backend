@@ -4,7 +4,7 @@ class CreateAvails < ActiveRecord::Migration[5.2]
       t.datetime :date
       t.boolean :morning
       t.boolean :afternoon
-      t.references :examiner, foreign_key: true
+      t.references :user, foreign_key: true
 
       t.timestamps
     end
