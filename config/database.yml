@@ -79,7 +79,8 @@ test:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
 production:
-  <<: *default
-  database: check-flight-api_production
-  username: check-flight-api
-  password: <%= ENV['CHECK-FLIGHT-API_DATABASE_PASSWORD'] %>
+  # <<: *default
+  # database: check-flight-api_production
+  # username: check-flight-api
+  # password: <%= ENV['CHECK-FLIGHT-API_DATABASE_PASSWORD'] %>
+    url: <%= ENV['DATABASE_URL'] %>
