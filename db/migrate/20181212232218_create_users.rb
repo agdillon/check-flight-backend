@@ -5,7 +5,7 @@ class CreateUsers < ActiveRecord::Migration[5.2]
       t.string :phone
       t.string :firstName
       t.string :lastName
-      t.boolean :isExaminer
+      t.boolean :isExaminer, default: false
       t.text :bio
       t.integer :rates
 

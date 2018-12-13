@@ -3,5 +3,6 @@ Rails.application.routes.draw do
   resources :users do
     resources :avails
   end
-  #resources :airports
+  post 'avail/search', action: :search, controller: 'avail'
+  #resources :airports only: [:index, :show]
 end
