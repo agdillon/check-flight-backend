@@ -1,2 +1,0 @@
-class ExaminersController < ApplicationController
-end
