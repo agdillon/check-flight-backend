@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   has_many :airport_users
-  has_many :airports, :through => :airport_users 
+  has_many :airports, :through => :airport_users
+  has_many :avails
 
   validates :firstName, :lastName, presence: true
   validates :email, presence: true, uniqueness: true, format: { with: /\A([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})\z/ }
