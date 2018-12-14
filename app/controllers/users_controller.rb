@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :update, :destroy]
+  before_action :set_user, only: [:show, :update, :destroy, :get_airports]
 
   # GET /users
   def index
@@ -28,6 +28,11 @@ class UsersController < ApplicationController
   def destroy
     @user.destroy
     head :no_content
+  end
+
+  # GET all airports for user (/users/:id/airports)
+  def get_airports
+    json_response(@user.airports)
   end
 
   private
