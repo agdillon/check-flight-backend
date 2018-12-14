@@ -1,13 +1,16 @@
-# README
+# check-flight-backend
+
+* An API in Ruby on Rails
 
 * Ruby version 2.5.3
 
 * Rails version 5.2.2
 
-* Database setup (no seeds yet):
+* Database setup:
 ```
 rake db:create
 rake db:migrate
+rake db:seed
 ```
 
 * Run the server (localhost:3000):
@@ -38,3 +41,4 @@ rake server
 |--------|----------|
 | read all airports | GET /airports |
 | read one airport | GET /airports/:id |
+| read all airports for user | GET /users/:id/airports |
