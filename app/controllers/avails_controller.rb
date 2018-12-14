@@ -33,7 +33,7 @@ class AvailsController < ApplicationController
   # POST /avails/search
   def search
     searchDate = Date.parse(params[:date])
-    result = avails.where(date: searchDate.all_day)  
+    result = Avail.where(date: searchDate.all_day)  
 
     json_response(result)
   end
