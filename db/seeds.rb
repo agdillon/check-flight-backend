@@ -6,6 +6,8 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+require 'faker'
+
 Airport.create(code: 'ALS', lat: 37.4444, long: -105.865, name: 'San Luis Valley Regional Airport', city: 'Alamosa', state: 'Colorado')
 Airport.create(code: 'APA', lat: 39.5752, long: -104.845, name: 'Centennial Airport', city: 'Englewood', state: 'Colorado')
 Airport.create(code: 'ASE', lat: 39.2197, long: -106.864, name: 'Aspen Pitkin County Airport-Sardy Field', city: 'Aspen', state: 'Colorado')
@@ -21,3 +23,26 @@ Airport.create(code: 'HDN', lat: 40.485, long: -107.219, name: 'Yampa Valley Air
 Airport.create(code: 'MTJ', lat: 38.5003, long: -107.899, name: 'Montrose Regional Airport', city: 'Montrose', state: 'Colorado')
 Airport.create(code: 'PUB', lat: 38.2836, long: -104.496, name: 'Pueblo Memorial Airport', city: 'Pueblo', state: 'Colorado')
 Airport.create(code: 'TEX', lat: 37.9544, long: -107.901, name: 'Telluride Regional Airport', city: 'Telluride', state: 'Colorado')
+
+50.times do
+  User.create(
+    firstName: Faker::Name.first_name,
+    lastName: Faker::Name.last_name,
+    email: Faker::Internet.unique.email,
+    isExaminer: [true, false].sample,
+    bio: Faker::Lorem.paragraph(3, true),
+    rates: rand(100..900)
+  )
+end
+
+for i in 1..50 do
+  @user = User.find(i)
+  if @user.isExaminer == true
+    for j in 0..2 do
+      AirportUser.create(
+        user_id: @user.id,
+        airport_id: rand(1..15)
+      )
+    end
+  end
+end
