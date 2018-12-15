@@ -28,6 +28,19 @@ rake server
 | update user | PUT /users/:id |
 | delete user | DELETE /users/:id |
 
+POST or PUT body format (bio and rates are optional):
+```
+{
+    "email": "name@example.com",
+    "phone": "5555555555",
+    "firstName": "John",
+    "lastName": "Doe",
+    "isExaminer": "false",
+    "bio": "Lorem ipsum",
+    "rates": "500"
+}
+```
+
 | Avail Action | Endpoint |
 |--------|----------|
 | search all availabilities by date | POST /avails/search |
@@ -36,6 +49,22 @@ rake server
 | create availability for user | POST /users/:user_id/avails |
 | update availability for user | PUT /users/:user_id/avails/:id |
 | delete availability for user | DELETE /users/:user_id/avails/:id |
+
+POST or PUT body format:
+```
+{
+	"date": "2018-12-16",
+	"morning": false,
+	"afternoon": true
+}
+```
+
+POST body format for /avails/search:
+```
+{
+	"date": "2018-12-16"
+}
+```
 
 | Airport Action | Endpoint |
 |--------|----------|
