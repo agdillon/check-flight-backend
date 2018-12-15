@@ -20,7 +20,7 @@ class UsersController < ApplicationController
 
   # PUT /users/:id
   def update
-    @user.update(user_params)
+    @user.update!(user_params)
     head :no_content
   end
 
