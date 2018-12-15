@@ -20,7 +20,7 @@ class AvailsController < ApplicationController
 
   # PUT /users/:user_id/avails/:id
   def update
-    @avail.update(avail_params)
+    @avail.update!(avail_params)
     head :no_content
   end
 
