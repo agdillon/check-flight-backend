@@ -14,7 +14,7 @@ class AvailsController < ApplicationController
 
   # POST /users/:user_id/avails
   def create
-    @user.avails.create!(avail_params)
+    @avail = @user.avails.create!(avail_params)
     json_response(@avail, :created)
   end
 
@@ -33,8 +33,8 @@ class AvailsController < ApplicationController
   # POST /avails/search
   def search
     searchDate = Date.parse(params[:date])
-    result = avails.where(date: searchDate.all_day)  
-
+    result = Avail.where(date: searchDate.all_day)
+    
     json_response(result)
   end
 
