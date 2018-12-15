@@ -14,7 +14,7 @@ class AvailsController < ApplicationController
 
   # POST /users/:user_id/avails
   def create
-    @user.avails.create!(avail_params)
+    @avail = @user.avails.create!(avail_params)
     json_response(@avail, :created)
   end
 
