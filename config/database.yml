@@ -83,4 +83,4 @@ production:
   database: check-flight-api_production
   username: check-flight-api
   # password: <%= ENV['CHECK-FLIGHT-API_DATABASE_PASSWORD'] %>
-    url: <%= ENV['DATABASE_URL'] %>
+  url: <%= ENV['DATABASE_URL'] %>
