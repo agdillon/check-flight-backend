@@ -1,6 +1,7 @@
 class AvailsController < ApplicationController
   before_action :set_user, only: [:index, :show, :create, :update, :destroy]
   before_action :set_avail, only: [:show, :update, :destroy]
+  before_action :authorize_edit, only: [:create, :update, :destroy]
 
   # GET /users/:user_id/avails
   def index
@@ -50,5 +51,11 @@ class AvailsController < ApplicationController
 
   def set_avail
     @avail = @user.avails.find_by!(id: params[:id]) if @user
+  end
+
+  def authorize_edit
+    if @user !== current_user
+      raise(ExceptionHandler::AuthenticationError, Message.unauthorized)
+    end
   end
 end

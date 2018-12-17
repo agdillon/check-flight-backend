@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :update, :destroy, :get_airports]
+  skip_before_action :authorize_request, only: :create
+  before_action :set_user, only: [:show, :update, :destroy]
+  before_action :authorize_edit, only: [:update, :destroy]
 
   # GET /users
   def index
@@ -7,10 +9,13 @@ class UsersController < ApplicationController
     json_response(@users)
   end
 
-  # POST /users (signup)
+  # POST /signup
+  # return authenticated token upon signup
   def create
-    @user = User.create!(user_params)
-    json_response(@user, :created)
+    user = User.create!(user_params)
+    auth_token = AuthenticateUser.new(user.email, user.password).call
+    response = { message: Message.account_created, auth_token: auth_token }
+    json_response(response, :created)
   end
 
   # GET /users/:id
@@ -30,18 +35,19 @@ class UsersController < ApplicationController
     head :no_content
   end
 
-  # GET all airports for user (/users/:id/airports)
-  def get_airports
-    json_response(@user.airports)
-  end
-
   private
 
   def user_params
-    params.permit(:email, :phone, :firstName, :lastName, :isExaminer, :bio, :rates)
+    params.permit(:email, :password, :password_confirmation, :phone, :firstName, :lastName, :isExaminer, :bio, :rates)
   end
 
   def set_user
     @user = User.find(params[:id])
+  end
+
+  def authorize_edit
+    if @user !== current_user
+      raise(ExceptionHandler::AuthenticationError, Message.unauthorized)
+    end
   end
 end
