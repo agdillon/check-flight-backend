@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   skip_before_action :authorize_request, only: :create
-  before_action :set_user, only: [:show, :update, :destroy, :get_airports]
+  before_action :set_user, only: [:show, :update, :destroy]
+  before_action :authorize_edit, only: [:update, :destroy]
 
   # GET /users
   def index
@@ -34,11 +35,6 @@ class UsersController < ApplicationController
     head :no_content
   end
 
-  # GET all airports for user (/users/:id/airports)
-  def get_airports
-    json_response(@user.airports)
-  end
-
   private
 
   def user_params
@@ -47,5 +43,11 @@ class UsersController < ApplicationController
 
   def set_user
     @user = User.find(params[:id])
+  end
+
+  def authorize_edit
+    if @user !== current_user
+      raise(ExceptionHandler::AuthenticationError, Message.unauthorized)
+    end
   end
 end
