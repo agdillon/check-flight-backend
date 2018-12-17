@@ -29,12 +29,13 @@ Airport.create(code: 'TEX', lat: 37.9544, long: -107.901, name: 'Telluride Regio
 
 # fake seed data for dev/testing purposes
 50.times do
-  User.create(
+  User.create!(
     firstName: Faker::Name.first_name,
     lastName: Faker::Name.last_name,
     email: Faker::Internet.unique.email,
     phone: '5555555555',
-    isExaminer: [true, false].sample
+    isExaminer: [true, false].sample,
+    password: 'password'
   )
 end
 
