@@ -8,27 +8,43 @@
 
 * Database setup:
 ```
-rake db:create
-rake db:migrate
-rake db:seed
+rails db:reset
 ```
 
 * Run the server (localhost:3000):
 ```
-rake server
+rails server
 ```
 
 * Routes list:
+
+| Auth Action | Endpoint |
+|-------------|----------|
+| signup      | POST /signup |
+| login       | POST /auth/login |
+
+POST body format (bio and rates are optional):
+```
+{
+    "email": "name@example.com",
+    "password": "password",
+    "phone": "5555555555",
+    "firstName": "John",
+    "lastName": "Doe",
+    "isExaminer": "false",
+    "bio": "Lorem ipsum",
+    "rates": "500"
+}
+```
 
 | User Action | Endpoint |
 |--------|----------|
 | read all users | GET /users |
 | read one user | GET /users/:id |
-| create user | POST /users |
 | update user | PUT /users/:id |
 | delete user | DELETE /users/:id |
 
-POST or PUT body format (bio and rates are optional):
+PUT body format (bio and rates are optional, can't change password):
 ```
 {
     "email": "name@example.com",
@@ -71,3 +87,11 @@ POST body format for /avails/search:
 | read all airports | GET /airports |
 | read one airport | GET /airports/:id |
 | read all airports for user | GET /users/:id/airports |
+| add/change airports for user | PUT /users/:id/airports |
+
+PUT body format:
+```
+{
+	"airports": "[1, 9, 15]"
+}
+```
