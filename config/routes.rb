@@ -3,7 +3,13 @@ Rails.application.routes.draw do
   resources :users do
     resources :avails
   end
+
   post 'avails/search', action: :search, controller: 'avails'
+
   resources :airports, only: [:index, :show]
   get 'users/:id/airports', action: :get_airports, controller: 'users'
+
+  # signup and authentication
+  post 'signup', to: 'users#create'
+  post 'auth/login', to: 'authentication#authenticate'
 end
