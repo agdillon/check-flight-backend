@@ -54,7 +54,7 @@ class AvailsController < ApplicationController
   end
 
   def authorize_edit
-    if @user !== current_user
+    if @user != current_user
       raise(ExceptionHandler::AuthenticationError, Message.unauthorized)
     end
   end

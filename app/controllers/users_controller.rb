@@ -46,8 +46,6 @@ class UsersController < ApplicationController
   end
 
   def authorize_edit
-    if @user !== current_user
-      raise(ExceptionHandler::AuthenticationError, Message.unauthorized)
-    end
+      raise(ExceptionHandler::AuthenticationError, Message.unauthorized) if @user != current_user
   end
 end
