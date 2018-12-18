@@ -25,6 +25,8 @@ class AirportsController < ApplicationController
   def put_airports
     # authorize that they're editing their own info
     if @user == current_user
+      @user.airport_users.delete_all
+
       for airport_id in airport_params.airports do
         @user.airport_users.create!(airport_id)
       end
