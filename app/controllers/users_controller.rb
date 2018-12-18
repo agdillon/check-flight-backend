@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   # GET /users
   def index
     @users = User.all
-    json_response(@users)
+    json_response(@users.as_json(:except => [:password_digest, :created_at, :updated_at]))
   end
 
   # POST /signup
@@ -20,7 +20,7 @@ class UsersController < ApplicationController
 
   # GET /users/:id
   def show
-    json_response(@user)
+    json_response(@user.as_json(:except => [:password_digest, :created_at, :updated_at]))
   end
 
   # PUT /users/:id
