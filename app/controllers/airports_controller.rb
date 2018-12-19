@@ -23,10 +23,10 @@ class AirportsController < ApplicationController
   def put_airports
     # authorize that they're editing their own info
     if @user == current_user
-      @user.airport_users.delete_all
+      @user.airport_users.destroy_all
 
-      for airport_id in airport_params.airports do
-        @user.airport_users.create!(airport_id)
+      for airport_id in params[:airports] do
+        @user.airport_users.create!({ 'airport_id' => airport_id })
       end
       head :no_content
     else
@@ -35,10 +35,6 @@ class AirportsController < ApplicationController
   end
 
   private
-
-  def airport_params
-    params.permit(:airports)
-  end
 
   def set_user
     @user = User.find(params[:id])
