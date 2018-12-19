@@ -4,15 +4,13 @@ class AirportsController < ApplicationController
   # GET /airports
   def index
     @airports = Airport.all
-    # json_response(@airports)
-    render json: @airports.as_json(include: [:users.as_json(:except => [:password_digest, :created_at, :updated_at])]), status: status
+    render json: @airports.as_json(include: { users: { except: [:password_digest, :created_at, :updated_at] } }), status: status
   end
 
   # GET /airports/:id
   def show
     @airport = Airport.find(params[:id])
-    # json_response(@airport)
-    render json: @airport.as_json(include: [:users.as_json(:except => [:password_digest, :created_at, :updated_at])]), status: status
+    render json: @airport.as_json(include: { users: { except: [:password_digest, :created_at, :updated_at] } }), status: status
   end
 
   # GET all airports for user (/users/:id/airports)
